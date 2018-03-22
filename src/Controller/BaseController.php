@@ -13,25 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Api\ApiProblem;
 use App\Api\ApiProblemException;
 use App\Entity\User;
-use App\Battle\BattleManager;
-use App\Repository\ProgrammerRepository;
 use App\Repository\UserRepository;
-use App\Repository\ProjectRepository;
-use App\Repository\BattleRepository;
 use App\Repository\ApiTokenRepository;
 
 abstract class BaseController extends Controller
 {
-    protected $battleManager;
-
-    /**
-     * @param mixed BattleManager $battleManager
-     */
-    public function __construct(BattleManager $battleManager)
+    public function __construct()
     {
-        $this->battleManager = $battleManager;
     }
-
 
     /**
      * Is the current user logged in?
@@ -83,41 +72,6 @@ abstract class BaseController extends Controller
     {
         return $this->getDoctrine()
             ->getRepository('App:User');
-    }
-
-    /**
-     * @return ProgrammerRepository
-     */
-    protected function getProgrammerRepository()
-    {
-        return $this->getDoctrine()
-            ->getRepository('App:Programmer');
-    }
-
-    /**
-     * @return ProjectRepository
-     */
-    protected function getProjectRepository()
-    {
-        return $this->getDoctrine()
-            ->getRepository('App:Project');
-    }
-
-    /**
-     * @return BattleRepository
-     */
-    protected function getBattleRepository()
-    {
-        return $this->getDoctrine()
-            ->getRepository('App:Battle');
-    }
-
-    /**
-     * @return \App\Battle\BattleManager
-     */
-    protected function getBattleManager()
-    {
-        return $this->battleManager;
     }
 
     /**

@@ -17,8 +17,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 use App\Entity\User;
-use App\Entity\Programmer;
-use App\Entity\Battle;
 
 class ApiTestCase extends KernelTestCase
 {
@@ -235,34 +233,6 @@ class ApiTestCase extends KernelTestCase
         $em->flush();
 
         return $user;
-    }
-
-    /**
-     * @return Programmer
-     */
-    protected function createProgrammer(array $data)
-    {
-        $em = $this->getEntityManager();
-
-        $data = array_merge(
-            [
-                'powerLevel' => rand(0, 10),
-                'user' => $em->getRepository('App:User')->findAny()
-            ],
-            $data
-        );
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $programmer = new Programmer();
-
-        foreach ($data as $key => $value) {
-            $accessor->setValue($programmer, $key, $value);
-        }
-
-        $em->persist($programmer);
-        $em->flush();
-
-        return $programmer;
     }
 
     /**

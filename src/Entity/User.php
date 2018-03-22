@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @Serializer\ExclusionPolicy("all")
- * @ORM\Table(name="battle_user")
+ * @ORM\Table(name="api_user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User extends BaseUser

@@ -31,16 +31,7 @@ services:
     App\EventListener\ApiExceptionSubscriber:
         arguments: ['%kernel.debug%']
 
-    App\Battle\BattleManager:
-        arguments: ['@doctrine.orm.entity_manager']
-
-    App\Battle\PowerManager:
-        arguments: ['@doctrine.orm.entity_manager']
-
     App\Controller\BaseController:
-        autowire: true
-
-    App\Controller\Web\ProgrammerController:
         autowire: true
 
     App\Serializer\LinkSerializationSubscriber:
