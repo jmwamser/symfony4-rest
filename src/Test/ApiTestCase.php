@@ -179,10 +179,10 @@ class ApiTestCase extends KernelTestCase
          * the config_test.yml file:
          *   A) Update framework.profiler.collect to true
          *   B) Update web_profiler.toolbar to true
-         */
-        $profilerUrl = $response->getHeader('X-Debug-Token-Link')[0];
+	 */
+        $profilerUrl = $response->getHeader('X-Debug-Token-Link');
         if ($profilerUrl) {
-            $fullProfilerUrl = $response->getHeader('Host')[0].$profilerUrl;
+            $fullProfilerUrl = $response->getHeader('Host')[0].$profilerUrl[0];
             $this->printDebug();
             $this->printDebug(sprintf(
                 'Profiler URL: <comment>%s</comment>',

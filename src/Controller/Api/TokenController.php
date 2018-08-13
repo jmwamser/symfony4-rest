@@ -2,12 +2,12 @@
 
 namespace App\Controller\Api;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 use App\Controller\BaseController;
 
@@ -17,10 +17,9 @@ use App\Controller\BaseController;
 class TokenController extends BaseController
 {
     /**
-     * @Route("/api/tokens")
-     * @Method("POST")
+     * @Route("/api/tokens", name="api_login", methods="POST")
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder)
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, JWTEncoderInterface $jwtEncoder)
     {
         $user = $this->getDoctrine()
             ->getRepository('App:User')
@@ -36,9 +35,16 @@ class TokenController extends BaseController
             throw new BadCredentialsException();
         }
 
-        $token = $this->get('lexik_jwt_authentication.encoder')
-            ->encode(['username' => $user->getUsername()]);
+        $token = $jwtEncoder->encode(['username' => $user->getUsername()]);
 
         return new JsonResponse(['token' => $token], 201);
+    }
+
+    /**
+     * @Route("/api/test", name="api_test", methods="GET")
+     */
+    public function woot(Request $request)
+    {
+        return new JsonResponse(['working' => true]);
     }
 }

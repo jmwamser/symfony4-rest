@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Form\FormInterface;
 use JMS\Serializer\SerializationContext;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -16,7 +16,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\ApiTokenRepository;
 
-abstract class BaseController extends Controller
+abstract class BaseController extends AbstractController
 {
     public function __construct()
     {

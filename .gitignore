@@ -14,6 +14,7 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+**/*~
 config/jwt/
 .ctags
 tags
